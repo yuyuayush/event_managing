@@ -1,10 +1,12 @@
+import { EmailAddressJSON } from "@clerk/nextjs/server"
+
 // ====== USER PARAMS
 export type CreateUserParams = {
     clerkId: string
     firstName: string
     lastName: string
     username: string
-    email: string
+    email: EmailAddressJSON
     photo: string
   }
   
