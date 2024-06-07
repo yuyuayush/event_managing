@@ -1,9 +1,21 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, decrement, incrementByAmount } from '../Features/counter/counterSlice';
+import { useState } from "react";
+import { change } from "../Features/state/stateSlice";
 export default function Home() {
+  const count = useSelector((state:any) => state.counter.value);
+  const name = useSelector((state:any)=>state.state.name);
+  const dispatch = useDispatch();
+  const [input, setInput] = useState("");
+  const handleClick = ()=>{
+    dispatch(change(input));
+  }
   return (
+
     <>
         <section>
 
@@ -38,13 +50,29 @@ export default function Home() {
         <h2 className="h2-bold">
           Trust by <br/>
           Thousand of Event 
-          </h2>
+          </h2> 
         <div className="flex w-full flex-col gap-5 md:flex-row">
           SERAch
           Catefory flter
         </div>
 
-        
+        <div>
+      <div>
+        <button onClick={() => dispatch(decrement())}>-</button>
+        <span>{count}</span>
+        <button onClick={() => dispatch(increment())}>+</button>
+      </div>
+      <div>
+        <button onClick={() => dispatch(incrementByAmount(5))}>Add 5</button>
+      </div>
+    </div>
+    <h1>{name}</h1>
+    <input placeholder="enter the value of it " type="text" onChange={(e)=>setInput(e.target.value)} value={input} />
+    <button className="px-6 py-3 bg-slate-600 text-white rounded-md hover:bg-slate-700" onClick={handleClick}>click me toh chane vale</button>
+        <div className="flex w-9/12 bg-slate-400 h-96 gap-7 justify-between ">
+          <div className="bg-red-200  p-4">hello my name is ayush</div>
+         <div className="bg-red-200 p-4">logo</div>
+        </div>
 
 
         </section>
